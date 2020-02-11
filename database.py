@@ -1,30 +1,48 @@
 import pymysql.cursors
 
 # Connect to the database
+
 connection = pymysql.connect(host='mrbartucz.com',
-                             user='CS485',
-                             password='WinonaState',
-                             db='CS485',
+
+                             user='sc3460ze',
+
+                             password='Jas4863009*',
+
+                             db='sc3460ze_uni',
+
                              charset='utf8mb4',
+
                              cursorclass=pymysql.cursors.DictCursor)
 
+input_user=input("Search for Name:")
+
 try:
+
     with connection.cursor() as cursor:
+
         # Select all Students
-        sql = "SELECT * from Students"
-        
+        #sql = "SELECT * from sc3460ze_students"
+        # Select student by searching with first name
+        sql = "SELECT * from sc3460ze_students where First_Name = '"+input_user+"'"
+              
         # execute the SQL command
+
         cursor.execute(sql)
-        
+       
+
         # get the results
+
         for result in cursor:
+
             print (result)
-        
-      
+
+    
         # If you INSERT, UPDATE or CREATE, the connection is not autocommit by default.
+
         # So you must commit to save your changes. 
-        # connection.commit()
-        
+
+        # connection.commit()  
 
 finally:
+
     connection.close()
